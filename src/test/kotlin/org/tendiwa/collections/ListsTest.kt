@@ -1,6 +1,7 @@
 package org.tendiwa.collections
 
 import org.junit.Test
+import org.tendiwa.collectioins.goForwardLooped
 import org.tendiwa.collectioins.nextAfter
 import org.tendiwa.collectioins.prevBefore
 import org.tendiwa.collectioins.randomElement
@@ -28,6 +29,13 @@ class ListsTest {
                 .map { list.randomElement(random) }
                 .toSet()
                 .containsAll(list)
+        )
+    }
+
+    @Test fun goForwardLooped_loopsAround() {
+        assertEquals(
+            "a",
+            listOf("a", "b", "c", "d").goForwardLooped(start = 2, steps = 2)
         )
     }
 }

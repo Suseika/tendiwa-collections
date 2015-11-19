@@ -16,3 +16,6 @@ fun <T> List<T>.prevBefore(index: Int): T {
  */
 fun <T> List<T>.randomElement(random: Random): T =
     this[Math.floor(this.size * random.nextDouble()).toInt()]
+
+fun <T> List<T>.goForwardLooped(start: Int, steps: Int): T
+    = this[(start + steps) % size]
