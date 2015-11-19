@@ -1,10 +1,6 @@
 package org.tendiwa.collections
 
 import org.junit.Test
-import org.tendiwa.collectioins.goForwardLooped
-import org.tendiwa.collectioins.nextAfter
-import org.tendiwa.collectioins.prevBefore
-import org.tendiwa.collectioins.randomElement
 import java.util.*
 import kotlin.test.assertEquals
 

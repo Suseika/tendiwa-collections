@@ -1,4 +1,4 @@
-package org.tendiwa.collectioins
+package org.tendiwa.collections
 
 fun loopedPrevIndex(current: Int, size: Int): Int =
     if (current == 0) size - 1 else current - 1

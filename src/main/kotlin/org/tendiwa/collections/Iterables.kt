@@ -1,4 +1,4 @@
-package org.tendiwa.collectioins
+package org.tendiwa.collections
 
 import java.util.*
 

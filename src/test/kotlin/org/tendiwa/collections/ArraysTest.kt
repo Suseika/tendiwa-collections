@@ -1,9 +1,6 @@
 package org.tendiwa.collections
 
 import org.junit.Test
-import org.tendiwa.collectioins.findEqualOrHigherInSortedArray
-import org.tendiwa.collectioins.loopedNextIndex
-import org.tendiwa.collectioins.loopedPrevIndex
 import kotlin.test.assertEquals
 
 class ArraysTest {

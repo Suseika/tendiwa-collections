@@ -1,7 +1,6 @@
 package org.tendiwa.collections
 
 import org.junit.Test
-import org.tendiwa.collectioins.loopedLinks
 import java.util.*
 import kotlin.test.assertEquals
 
