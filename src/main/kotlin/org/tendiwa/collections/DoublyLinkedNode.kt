@@ -66,23 +66,23 @@ class DoublyLinkedNode<T>(val payload: T) : Iterable<T> {
     // TODO: Do we really need this method anywhere?
     fun revertChain() {
         assert(next == null || previous == null)
-        var temp: DoublyLinkedNode<T>
-        var current: DoublyLinkedNode<T> = this
+        var temp: DoublyLinkedNode<T>?
+        var current: DoublyLinkedNode<T>? = this
         if (next == null) {
             // Starting from the last node
             while (current != null) {
-                temp = current.next!!
+                temp = current.next
                 current.next = current.previous
                 current.previous = temp
-                current = current.next!!
+                current = current.next
             }
         } else {
             // Starting from the first node
             while (current != null) {
-                temp = current.previous!!
+                temp = current.previous
                 current.previous = current.next
                 current.next = temp
-                current = current.previous!!
+                current = current.previous
             }
         }
     }
