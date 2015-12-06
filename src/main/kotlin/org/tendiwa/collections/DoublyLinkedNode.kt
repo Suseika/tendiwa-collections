@@ -1,23 +1,19 @@
 package org.tendiwa.collections
 
 import java.util.*
-import java.util.function.Consumer
 
 /**
  * Implementation of a doubly linked list's node.
- * @param Type of payload.
  */
-class DoublyLinkedNode<T>(val payload: T) : Iterable<T> {
-    var next: DoublyLinkedNode<T>? = null
+data class DoublyLinkedNode<T>(
+    override val payload: T
+) : ImmutableDoublyLinkedNode<T> {
+    override var next: DoublyLinkedNode<T>? = null
         private set
 
-    var previous: DoublyLinkedNode<T>? = null
+    override var previous: DoublyLinkedNode<T>? = null
         private set
 
-    val isDisconnected: Boolean
-        get() = next == null && previous == null
-
-    // TODO: Make connectWithNext and connectWithPrevious set previous and next for another node as well
     fun connectWithNext(node: DoublyLinkedNode<T>) {
         Objects.requireNonNull(node)
         assert(settingNextPreservesConnectivity(node))
@@ -58,7 +54,6 @@ class DoublyLinkedNode<T>(val payload: T) : Iterable<T> {
     /**
      * [Reverts a doubly linked list](http://www.geeksforgeeks.org/reverse-a-doubly-linked-list/)
      *
-     *
      * Swaps [DoublyLinkedNode.next] and [DoublyLinkedNode.previous] of each
      * payload in the chain of this node. This node must be either the first in
      * the chain or the last.
@@ -88,8 +83,7 @@ class DoublyLinkedNode<T>(val payload: T) : Iterable<T> {
     }
 
     /**
-     * @param listEnd
-     * * 	Head or tail of another list.
+     * @param listEnd Head or tail of another list.
      */
     fun uniteWith(listEnd: DoublyLinkedNode<T>) {
         val thisNextNull = this.next == null
@@ -133,107 +127,5 @@ class DoublyLinkedNode<T>(val payload: T) : Iterable<T> {
                 uniteWith(listEnd)
             }
         }
-    }
-
-    // TODO: Split into chain iterator and cycle iterator
-    override fun iterator(): Iterator<T> {
-        return if (next == null) BackwardIterator() else ForwardIterator()
-    }
-
-    private fun iterateCircularList(action: Consumer<in T>) {
-        assert(next != null && previous != null)
-        var current: DoublyLinkedNode<T>? = this
-        do {
-            action.accept(current!!.payload)
-            current = current.next
-            if (current == null) {
-                throw IllegalArgumentException(
-                    "You can only iterate over a chain of nodes beginning from a " + "node that is either end or start of a chain, or is in the middle of a circular chain")
-            }
-        } while (current !== this)
-    }
-
-    private fun iterateChainFromStart(action: Consumer<in T>) {
-        assert(previous == null && next != null)
-        var current: DoublyLinkedNode<T>? = this
-        while (current != null) {
-            action.accept(current.payload)
-            current = current.next
-        }
-    }
-
-    private fun iterateChainFromEnd(action: Consumer<in T>) {
-        assert(next == null && previous != null)
-        var current: DoublyLinkedNode<T>? = this
-        while (current != null) {
-            action.accept(current.payload)
-            current = current.previous
-        }
-    }
-
-    fun hasBothNeighbors(): Boolean {
-        // TODO: Maybe here should be XOR?
-        return previous != null && next != null
-    }
-
-    // TODO: Find out if getNext is used instead of this method anywhere
-    operator fun hasNext(): Boolean {
-        return next != null
-    }
-
-    fun hasPrevious(): Boolean {
-        return previous != null
-    }
-
-    val isStartOfAChain: Boolean
-        get() = hasNext() && !hasPrevious()
-
-    private abstract inner class LinkedListIterator : Iterator<T> {
-
-        protected var current: DoublyLinkedNode<T>? = this@DoublyLinkedNode
-        protected val start = this@DoublyLinkedNode
-        protected var hasNext = true
-
-        override fun hasNext(): Boolean {
-            return hasNext
-        }
-
-        protected fun recomputeHasNext() {
-            hasNext = current != null && current !== start
-        }
-
-        override fun next(): T {
-            if (!hasNext) {
-                throw NoSuchElementException()
-            }
-            val answer = current!!.payload
-            current = chooseNext(current!!)
-            recomputeHasNext()
-            return answer
-        }
-
-        protected abstract fun chooseNext(
-            current: DoublyLinkedNode<T>
-        ): DoublyLinkedNode<T>?
-    }
-
-    private inner class ForwardIterator : LinkedListIterator() {
-        override fun chooseNext(
-            current: DoublyLinkedNode<T>
-        ): DoublyLinkedNode<T>? {
-            return current.next
-        }
-    }
-
-    private inner class BackwardIterator : LinkedListIterator() {
-        override fun chooseNext(
-            current: DoublyLinkedNode<T>
-        ): DoublyLinkedNode<T>? {
-            return current.previous
-        }
-    }
-
-    override fun toString(): String {
-        return "DoublyLinkedNode{$payload}"
     }
 }
