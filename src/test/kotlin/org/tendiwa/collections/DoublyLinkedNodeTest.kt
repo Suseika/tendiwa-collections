@@ -69,4 +69,31 @@ class DoublyLinkedNodeTest {
         assertNotNull(backwardChain.previous)
         assertEquals(3, Iterables.size(backwardChain))
     }
+
+    @Test fun circularlyConnectedNodesAreInCycle() {
+        val a = DoublyLinkedNode("dude")
+        val b = DoublyLinkedNode("man")
+        val c = DoublyLinkedNode("amigo")
+        a.connectWithNext(b)
+        b.connectWithNext(c)
+        c.connectWithNext(a)
+        assert(a.isInCycle)
+        assert(b.isInCycle)
+        assert(c.isInCycle)
+    }
+
+    @Test fun disconnectedNodeIsNotInCycle() {
+        assertFalse(DoublyLinkedNode("dude").isInCycle)
+    }
+
+    @Test fun nodesConnectedInAPolylineAreNotInCycle() {
+        val a = DoublyLinkedNode("dude")
+        val b = DoublyLinkedNode("man")
+        val c = DoublyLinkedNode("amigo")
+        a.connectWithNext(b)
+        b.connectWithNext(c)
+        assertFalse(a.isInCycle)
+        assertFalse(b.isInCycle)
+        assertFalse(c.isInCycle)
+    }
 }
