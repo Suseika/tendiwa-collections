@@ -6,7 +6,7 @@ import java.util.*
  * Implementation of a doubly linked list's node.
  */
 data class DoublyLinkedNode<T>(
-    override val payload: T
+    override var payload: T
 ) : ImmutableDoublyLinkedNode<T> {
     override var next: DoublyLinkedNode<T>? = null
         private set
