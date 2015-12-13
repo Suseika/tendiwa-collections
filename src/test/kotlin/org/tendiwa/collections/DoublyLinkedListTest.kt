@@ -35,16 +35,27 @@ class DoublyLinkedListTest {
     }
 
     @Test
-    fun unlinkFailsIsParemeterIsNotANeighbor() {
+    fun unlinkFailsIfParemeterIsNotANeighbor() {
         expectRule.expectMessage(
             "Node to unlink must be a neighbor of this node"
         )
         expectRule.expect(IllegalArgumentException::class.java)
         DoublyLinkedCycle(
             listOf("a", "b", "c", "d")
-        ).apply {
-            this[0].unlink(this[2])
-        }
+        )
+            .apply { this[0].unlink(this[2]) }
+    }
+
+    @Test
+    fun unlinkFailsWithACycleOf2Nodes() {
+        expectRule.expectMessage(
+            "Can't unlink a cycle of 2 nodes"
+        )
+        expectRule.expect(IllegalArgumentException::class.java)
+        DoublyLinkedCycle(
+            listOf("a", "b")
+        )
+            .apply { this[0].unlink(this[1]) }
     }
 }
 

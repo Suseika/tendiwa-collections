@@ -130,6 +130,9 @@ data class DoublyLinkedNode<T>(
     }
 
     fun unlink(neighbor: ImmutableDoublyLinkedNode<T>) {
+        if (next == previous) {
+            throw IllegalArgumentException("Can't unlink a cycle of 2 nodes")
+        }
         if (next == neighbor) {
             next!!.previous = null
             next = null
