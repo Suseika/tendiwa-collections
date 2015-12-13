@@ -128,4 +128,18 @@ data class DoublyLinkedNode<T>(
             }
         }
     }
+
+    fun unlink(neighbor: ImmutableDoublyLinkedNode<T>) {
+        if (next == neighbor) {
+            next!!.previous = null
+            next = null
+        } else if (previous == neighbor) {
+            previous!!.next = null
+            previous = null
+        } else {
+            throw IllegalArgumentException(
+                "Node to unlink must be a neighbor of this node"
+            )
+        }
+    }
 }
