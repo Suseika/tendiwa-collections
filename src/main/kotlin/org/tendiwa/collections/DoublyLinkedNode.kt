@@ -30,8 +30,9 @@ data class DoublyLinkedNode<T>(
 
     /**
      * @param node A node to insert.
-     * @return false if inserting `node` with [.connectWithNext] will introduce
-     * a loop or isolate some part of the list.
+     * @return false if inserting `node` with
+     * [DoublyLinkedNode.connectWithNext] will introduce a loop or isolate some
+     * part of the list.
      * @see [DoublyLinkedNode.settingPreviousPreservesConnectivity]
      */
     private fun settingNextPreservesConnectivity(node: DoublyLinkedNode<T>?): Boolean =
@@ -42,8 +43,9 @@ data class DoublyLinkedNode<T>(
 
     /**
      * @param node A node to insert.
-     * @return false if inserting `node` with [.connectWithPrevious] will
-     * introduce a loop or isolate some part of the list.
+     * @return false if inserting `node` with
+     * [DoublyLInkedNode.connectWithPrevious] will introduce a loop or isolate
+     * some part of the list.
      */
     private fun settingPreviousPreservesConnectivity(node: DoublyLinkedNode<T>?): Boolean =
         node != null
