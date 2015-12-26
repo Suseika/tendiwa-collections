@@ -65,3 +65,22 @@ val <T> Iterable<T>.loopedTriLinks: Iterable<Triple<T, T, T>> get() {
     return links
 }
 
+fun <T: Comparable<T>> Iterable<T>.isSortedAscending(): Boolean {
+    val iterator = iterator()
+    if (!iterator.hasNext()) {
+        return true
+    }
+    var previous = iterator.next()
+    if (!iterator.hasNext()) {
+        return true
+    }
+    do {
+        var current = iterator.next()
+        if (previous > current) {
+            return false
+        }
+        previous = current
+    } while (iterator.hasNext())
+    return true
+}
+
