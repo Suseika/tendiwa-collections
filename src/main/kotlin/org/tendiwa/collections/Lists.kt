@@ -41,3 +41,27 @@ fun <T> List<T>.prefix(index: Int) : List<T> =
  */
 fun <T> List<T>.withoutLast(): List<T> =
     subList(0, lastIndex)
+
+/**
+ * Tells how many elements we have to pick from a list until they reduce to a
+ * good enough value.
+ * @param reduce Reducing function.
+ * @param enough Predicate for a good enough running total.
+ * @return How many items we are to pick from a list
+ */
+fun <T> List<T>.pickEnough(
+    reduce: (T, T) -> T,
+    enough: (T) -> Boolean
+): Int? {
+    var soFar = first()
+    if (enough(soFar)) {
+        return 1
+    }
+    for (i in 1..size - 1) {
+        soFar = reduce(soFar, this[i])
+        if (enough(soFar)) {
+            return i+1
+        }
+    }
+    return null
+}

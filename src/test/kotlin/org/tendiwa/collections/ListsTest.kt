@@ -94,4 +94,20 @@ class ListsTest {
     fun postfixWorksWithIndexEqualToSize() {
         assertEquals(listOf(), listOf(1, 2, 3).postfix(3))
     }
+
+    @Test
+    fun pickEnoughReducesHeadsUntilResultSatisfiesPredicate() {
+        assertEquals(
+            4,
+            listOf(1, 2, 3, 4, 5, 6).pickEnough({ a, b -> a + b }, { it >= 10 })
+        )
+    }
+
+    @Test
+    fun pickEnoughReturnsNullIfCompleteReductionDoesNotSatisfyPredicate() {
+        assertEquals(
+            null,
+            listOf(1, 2, 3, 4, 5, 6).pickEnough({ a, b -> a + b }, { it > 100 })
+        )
+    }
 }
