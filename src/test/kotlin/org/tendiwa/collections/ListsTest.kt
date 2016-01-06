@@ -40,10 +40,18 @@ class ListsTest {
     }
 
     @Test
-    fun withoutLast() {
+    fun withoutLastRemovesLastElement() {
         assertEquals(
             listOf(1, 2, 3, 4),
             listOf(1, 2, 3, 4, 5).withoutLast()
+        )
+    }
+
+    @Test
+    fun withoutFirstRemovesFirstElement() {
+        assertEquals(
+            listOf(2, 3, 4),
+            listOf(1, 2, 3, 4).withoutFirst()
         )
     }
 

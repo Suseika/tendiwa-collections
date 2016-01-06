@@ -25,7 +25,7 @@ fun <T> List<T>.goForwardLooped(start: Int, steps: Int): T
  * @param index First index
  * @see prefix
  */
-fun <T> List<T>.postfix(index: Int) : List<T> =
+fun <T> List<T>.postfix(index: Int): List<T> =
     subList(index, size)
 
 /**
@@ -33,7 +33,7 @@ fun <T> List<T>.postfix(index: Int) : List<T> =
  * @param index Last index.
  * @see postfix
  */
-fun <T> List<T>.prefix(index: Int) : List<T> =
+fun <T> List<T>.prefix(index: Int): List<T> =
     subList(0, index)
 
 /**
@@ -41,6 +41,12 @@ fun <T> List<T>.prefix(index: Int) : List<T> =
  */
 fun <T> List<T>.withoutLast(): List<T> =
     subList(0, lastIndex)
+
+/**
+ * Returns this list without first element.
+ */
+fun <T> List<T>.withoutFirst(): List<T> =
+    subList(1, size)
 
 /**
  * Tells how many elements we have to pick from a list until they reduce to a
@@ -60,7 +66,7 @@ fun <T> List<T>.pickEnough(
     for (i in 1..size - 1) {
         soFar = reduce(soFar, this[i])
         if (enough(soFar)) {
-            return i+1
+            return i + 1
         }
     }
     return null
