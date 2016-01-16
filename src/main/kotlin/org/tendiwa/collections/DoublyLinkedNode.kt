@@ -1,7 +1,5 @@
 package org.tendiwa.collections
 
-import java.util.*
-
 /**
  * Implementation of a doubly linked list's node.
  */
@@ -15,14 +13,12 @@ data class DoublyLinkedNode<T>(
         private set
 
     fun connectWithNext(node: DoublyLinkedNode<T>) {
-        Objects.requireNonNull(node)
         assert(settingNextPreservesConnectivity(node))
         next = node
         node.previous = this
     }
 
     fun connectWithPrevious(node: DoublyLinkedNode<T>) {
-        Objects.requireNonNull(node)
         assert(settingPreviousPreservesConnectivity(node))
         previous = node
         node.next = this
