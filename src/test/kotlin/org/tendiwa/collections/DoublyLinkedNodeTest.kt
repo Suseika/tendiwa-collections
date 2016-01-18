@@ -7,20 +7,20 @@ import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
 class DoublyLinkedNodeTest {
-    private fun ThreeNodeCycle(): DoublyLinkedNode<String> {
-        val one = DoublyLinkedNode("a")
-        val two = DoublyLinkedNode("b")
-        val three = DoublyLinkedNode("c")
+    private fun ThreeNodeCycle(): MutableDoublyLinkedNode<String> {
+        val one = MutableDoublyLinkedNode("a")
+        val two = MutableDoublyLinkedNode("b")
+        val three = MutableDoublyLinkedNode("c")
         one.connectWithNext(two)
         two.connectWithNext(three)
         three.connectWithNext(one)
         return one
     }
 
-    private fun ThreeNodeChain(): DoublyLinkedNode<String> {
-        val one = DoublyLinkedNode("A")
-        val two = DoublyLinkedNode("B")
-        val three = DoublyLinkedNode("C")
+    private fun ThreeNodeChain(): MutableDoublyLinkedNode<String> {
+        val one = MutableDoublyLinkedNode("A")
+        val two = MutableDoublyLinkedNode("B")
+        val three = MutableDoublyLinkedNode("C")
         one.connectWithNext(two)
         two.connectWithNext(three)
         return one
@@ -71,9 +71,9 @@ class DoublyLinkedNodeTest {
     }
 
     @Test fun circularlyConnectedNodesAreInCycle() {
-        val a = DoublyLinkedNode("dude")
-        val b = DoublyLinkedNode("man")
-        val c = DoublyLinkedNode("amigo")
+        val a = MutableDoublyLinkedNode("dude")
+        val b = MutableDoublyLinkedNode("man")
+        val c = MutableDoublyLinkedNode("amigo")
         a.connectWithNext(b)
         b.connectWithNext(c)
         c.connectWithNext(a)
@@ -83,13 +83,13 @@ class DoublyLinkedNodeTest {
     }
 
     @Test fun disconnectedNodeIsNotInCycle() {
-        assertFalse(DoublyLinkedNode("dude").isInCycle)
+        assertFalse(MutableDoublyLinkedNode("dude").isInCycle)
     }
 
     @Test fun nodesConnectedInAPolylineAreNotInCycle() {
-        val a = DoublyLinkedNode("dude")
-        val b = DoublyLinkedNode("man")
-        val c = DoublyLinkedNode("amigo")
+        val a = MutableDoublyLinkedNode("dude")
+        val b = MutableDoublyLinkedNode("man")
+        val c = MutableDoublyLinkedNode("amigo")
         a.connectWithNext(b)
         b.connectWithNext(c)
         assertFalse(a.isInCycle)

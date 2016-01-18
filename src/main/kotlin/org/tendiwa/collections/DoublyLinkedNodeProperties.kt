@@ -1,8 +1,8 @@
 package org.tendiwa.collections
 
-val <T> ImmutableDoublyLinkedNode<T>.isInCycle: Boolean
+val <T> DoublyLinkedNode<T>.isInCycle: Boolean
     get() {
-        var current: ImmutableDoublyLinkedNode<T> = this
+        var current: DoublyLinkedNode<T> = this
         do {
             val following = current.next ?: return false
             current = following

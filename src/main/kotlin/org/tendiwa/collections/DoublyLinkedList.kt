@@ -1,6 +1,6 @@
 package org.tendiwa.collections
 
-fun <T> DoublyLinkedCycle(payloads: List<T>): List<DoublyLinkedNode<T>> {
+fun <T> DoublyLinkedCycle(payloads: List<T>): List<MutableDoublyLinkedNode<T>> {
     return payloads
         .apply {
             if (size < 2) {
@@ -9,7 +9,7 @@ fun <T> DoublyLinkedCycle(payloads: List<T>): List<DoublyLinkedNode<T>> {
                 )
             }
         }
-        .map { DoublyLinkedNode(it) }
+        .map { MutableDoublyLinkedNode(it) }
         .apply {
             loopedLinks.forEach {
                 pair ->
