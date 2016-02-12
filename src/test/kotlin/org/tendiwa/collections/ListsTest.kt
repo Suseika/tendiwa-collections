@@ -118,4 +118,28 @@ class ListsTest {
             listOf(1, 2, 3, 4, 5, 6).pickEnough({ a, b -> a + b }, { it > 100 })
         )
     }
+
+    @Test
+    fun `circular sublist can go over 0th element`() {
+        listOf(0, 1, 2, 3, 4, 5)
+            .circularSubList(4, 2)
+            .apply {
+                assertEquals(
+                    listOf(4, 5, 0, 1),
+                    this
+                )
+            }
+    }
+
+    @Test
+    fun `circuclar sublist can work as the usual sublist`() {
+        listOf(0, 1, 2, 3, 4, 5)
+            .circularSubList(2, 4)
+            .apply {
+                assertEquals(
+                    listOf(2, 3),
+                    this
+                )
+            }
+    }
 }

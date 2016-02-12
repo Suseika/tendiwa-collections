@@ -71,3 +71,16 @@ fun <T> List<T>.pickEnough(
     }
     return null
 }
+
+/**
+ * Creates a sub-list that goes over the end of the list and the start if the
+ * list if [start] > [endExclusive]
+ * @param start Low endpoint, inclusive.
+ * @param endExclusive High endpoint, exclusive.
+ */
+fun <T> List<T>.circularSubList(start: Int, endExclusive: Int): List<T> =
+    if (start <= endExclusive || start < 0 || endExclusive < 0) {
+        subList(start, endExclusive)
+    } else {
+        subList(start, size) + subList(0, endExclusive)
+    }
