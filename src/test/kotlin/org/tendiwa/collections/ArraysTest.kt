@@ -56,5 +56,16 @@ class ArraysTest {
                 assertEquals(5, this[4][6])
             }
     }
+
+    @Test
+    fun `rectangular array`() {
+        RectangularArray(10, 20, { x, y -> 5 })
+            .apply {
+                assertEquals(10, size)
+                assertEquals(20, this[0].size)
+                assertEquals(5, this[4][6])
+                assertEquals(5, this[9][19])
+            }
+    }
 }
 

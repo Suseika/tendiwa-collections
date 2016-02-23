@@ -16,9 +16,17 @@ fun BooleanArray2D(width: Int, height: Int): Array<BooleanArray> =
  * element in the square array.
  */
 inline fun <reified T> SquareArray(
-    width: Int, init: (Int, Int) -> T
+    width: Int,
+    init: (Int, Int) -> T
 ): Array<Array<T>> =
     Array(width, { i -> Array(width, { j -> init(i, j) }) })
+
+inline fun <reified T> RectangularArray(
+    width: Int,
+    height: Int,
+    init: (Int, Int) -> T
+): Array<Array<T>> =
+    Array(width, { i -> Array(height, { j -> init(i, j) }) })
 
 /**
  * Finds a sorted array's element that is {@code >= value} for which the
