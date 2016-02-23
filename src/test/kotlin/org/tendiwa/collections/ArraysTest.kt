@@ -46,5 +46,15 @@ class ArraysTest {
             intArrayOf(1, 3, 4, 6, 10).findEqualOrHigherInSortedArray(2)
         )
     }
+
+    @Test
+    fun `square array`() {
+        SquareArray(10, { x, y -> 5 })
+            .apply {
+                assertEquals(10, size)
+                assertEquals(10, this[0].size)
+                assertEquals(5, this[4][6])
+            }
+    }
 }
 

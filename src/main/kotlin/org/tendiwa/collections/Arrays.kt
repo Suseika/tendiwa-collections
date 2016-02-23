@@ -10,6 +10,17 @@ fun BooleanArray2D(width: Int, height: Int): Array<BooleanArray> =
     Array(width, { BooleanArray(height) })
 
 /**
+ * Creates a square array and wills it using a producer funciton.
+ * @param width Width and height of the suqare array.
+ * @param init Producer function whose parameters are two indices of an
+ * element in the square array.
+ */
+inline fun <reified T> SquareArray(
+    width: Int, init: (Int, Int) -> T
+): Array<Array<T>> =
+    Array(width, { i -> Array(width, { j -> init(i, j) }) })
+
+/**
  * Finds a sorted array's element that is {@code >= value} for which the
  * previous element is {@code < value}.
  *
