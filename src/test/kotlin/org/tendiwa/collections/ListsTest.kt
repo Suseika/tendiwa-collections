@@ -7,21 +7,26 @@ import java.util.*
 import kotlin.test.assertEquals
 
 class ListsTest {
-    @JvmField @Rule val expectRule = ExpectedException.none()
+    @JvmField
+    @Rule
+    val expectRule = ExpectedException.none()
 
-    @Test fun nextAfter() {
+    @Test
+    fun nextAfter() {
         val list = listOf("a", "b", "c")
         assertEquals("a", list.nextAfter(2))
         assertEquals("b", list.nextAfter(0))
     }
 
-    @Test fun prevBefore() {
+    @Test
+    fun prevBefore() {
         val list = listOf("a", "b", "c")
         assertEquals("c", list.prevBefore(0))
         assertEquals("a", list.prevBefore(1))
     }
 
-    @Test fun randomElement() {
+    @Test
+    fun randomElement() {
         val random: Random = Random(0)
         val list = listOf("a", "b", "c")
         assert(
@@ -32,7 +37,8 @@ class ListsTest {
         )
     }
 
-    @Test fun goForwardLooped_loopsAround() {
+    @Test
+    fun goForwardLooped_loopsAround() {
         assertEquals(
             "a",
             listOf("a", "b", "c", "d").goForwardLooped(start = 2, steps = 2)
@@ -142,4 +148,24 @@ class ListsTest {
                 )
             }
     }
+
+    @Test
+    fun consecutiveCircularPairs() {
+        assertEquals(
+            listOf(1 to 2, 2 to 3, 3 to 4, 4 to 1),
+            listOf(1, 2, 3, 4).consecutiveCircularPairs()
+        )
+        assertEquals(
+            listOf(1 to 2, 2 to 1),
+            listOf(1, 2).consecutiveCircularPairs()
+        )
+    }
+
+    @Test
+    fun `consecutiveCircularPairs fails if list too short`() {
+        expectRule.expect(IndexOutOfBoundsException::class.java)
+        listOf(1).consecutiveCircularPairs()
+    }
+
+
 }

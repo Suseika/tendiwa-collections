@@ -17,8 +17,7 @@ fun <T> List<T>.prevBefore(index: Int): T {
 fun <T> List<T>.randomElement(random: Random): T =
     this[Math.floor(this.size * random.nextDouble()).toInt()]
 
-fun <T> List<T>.goForwardLooped(start: Int, steps: Int): T
-    = this[(start + steps) % size]
+fun <T> List<T>.goForwardLooped(start: Int, steps: Int): T = this[(start + steps) % size]
 
 /**
  * Returns `subList(index, size)`.
@@ -84,3 +83,14 @@ fun <T> List<T>.circularSubList(start: Int, endExclusive: Int): List<T> =
     } else {
         subList(start, size) + subList(0, endExclusive)
     }
+
+fun <T> List<T>.consecutiveCircularPairs(): List<Pair<T, T>> {
+    if (size < 2) {
+        throw IndexOutOfBoundsException(
+            "List should be of size at least 2; it has $size elements"
+        )
+    }
+    return indices
+        .map { Pair(it, (it + 1) % size) }
+        .map { Pair(this[it.first], this[it.second]) }
+}
