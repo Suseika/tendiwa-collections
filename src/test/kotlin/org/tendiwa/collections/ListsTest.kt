@@ -167,5 +167,40 @@ class ListsTest {
         listOf(1).consecutiveCircularPairs()
     }
 
+    @Test
+    fun `modifyElement modifies an element`() {
+        listOf(1,2,3,4)
+            .modifyElement(2, {it+1})
+            .apply {
+                assertEquals(
+                    listOf(1,2,4,4),
+                    this
+                )
+            }
+    }
+
+    @Test
+    fun `modifyElement can modify last element`() {
+        listOf(1,2,3,4)
+            .modifyElement(3, {it+1})
+            .apply {
+                assertEquals(
+                    listOf(1,2,3,5),
+                    this
+                )
+            }
+
+    @Test
+    fun `modifyElement can modify first element`() {
+        listOf(1,2,3,4)
+            .modifyElement(0, {it+1})
+            .apply {
+                assertEquals(
+                    listOf(2,2,3,4),
+                    this
+                )
+            }
+    }   }
+
 
 }

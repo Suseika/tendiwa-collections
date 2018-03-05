@@ -94,3 +94,6 @@ fun <T> List<T>.consecutiveCircularPairs(): List<Pair<T, T>> {
         .map { Pair(it, (it + 1) % size) }
         .map { Pair(this[it.first], this[it.second]) }
 }
+
+fun <T> List<T>.modifyElement(index: Int, how: (T)->T): List<T> =
+    subList(0, index) + how(this[index]) + subList(index + 1, size)
