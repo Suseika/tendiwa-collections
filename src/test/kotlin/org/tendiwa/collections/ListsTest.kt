@@ -170,7 +170,7 @@ class ListsTest {
     @Test
     fun `modifyElement modifies an element`() {
         listOf(1,2,3,4)
-            .modifyElement(2, {it+1})
+            .modifyElement({2}, {it+1})
             .apply {
                 assertEquals(
                     listOf(1,2,4,4),
@@ -182,7 +182,7 @@ class ListsTest {
     @Test
     fun `modifyElement can modify last element`() {
         listOf(1,2,3,4)
-            .modifyElement(3, {it+1})
+            .modifyElement({it.lastIndex}, {it+1})
             .apply {
                 assertEquals(
                     listOf(1,2,3,5),
@@ -193,7 +193,7 @@ class ListsTest {
     @Test
     fun `modifyElement can modify first element`() {
         listOf(1,2,3,4)
-            .modifyElement(0, {it+1})
+            .modifyElement({0}, {it+1})
             .apply {
                 assertEquals(
                     listOf(2,2,3,4),
